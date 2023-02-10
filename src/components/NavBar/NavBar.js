@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { NavElement } from './NavElement';
 
 const navbar = [
@@ -10,11 +9,9 @@ const navbar = [
 export default function NavBar()
 {
     return (
-        <div className=''>
-            <div className=''>
-                <NavElement text={navbar[0].text} link={navbar[0].link}></NavElement>
-                <NavElement text={navbar[1].text} link={navbar[1].link}></NavElement>
-            </div>
+        <div className='flex justify-evenly m-auto bg-slate-500'>
+            <NavElement text={navbar[0].text} link={navbar[0].link}></NavElement>
+            <NavElement text={navbar[1].text} link={navbar[1].link}></NavElement>
         </div>
     )
 }
