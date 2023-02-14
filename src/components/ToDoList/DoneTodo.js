@@ -6,7 +6,7 @@ const doneButton = {
     text: 'Done!'
 }
 
-const UpdateTodo = ({docId}) => {
+const DoneTodo = ({docId}) => {
     const todoDoneTrue = (e) => {
         e.preventDefault()
         firestore.collection('todos').doc(docId).update({
@@ -26,4 +26,4 @@ const UpdateTodo = ({docId}) => {
     )
 }
 
-export default UpdateTodo
+export default DoneTodo
