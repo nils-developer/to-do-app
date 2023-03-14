@@ -28,7 +28,7 @@ function App() {
                  todos.map((todo, index) => {
                      return(
                          <ToDoList
-                             docId={todo.id}
+                             docId={todo.docId}
                              description={todo.description}
                              done={todo.done}
                              key={index}

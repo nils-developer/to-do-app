@@ -18,11 +18,9 @@ const RemoveTodo = ({docId}) => {
         //     console.error('Error removing document: ', error);
         // })
 
-        todos.filter(todo => todo.id === docId ? console.log(docId) : console.log(docId))
+        const filteredTodos = todos.filter(todo => docId !== todo.docId);
 
-        setTodos([
-            ...todos
-        ])
+        setTodos(filteredTodos);
     }
     return (
         <form className='flex justify-center' onSubmit={removeTodo}>
