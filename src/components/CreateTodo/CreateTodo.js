@@ -1,19 +1,25 @@
 import { Button } from '../Button/Button';
-import { firestore } from '../../firebase/firebase-config';
+import { useTodos } from "../../Contexts";
+// import { firestore } from '../../firebase/firebase-config';
 
 const submitButton = {
     type: 'submit',
     text: 'Add To-Do'
 }
 
-const CreateTodo = ({setTodos, todos}) => {
+const CreateTodo = () => {
+    const [todos, setTodos] = useTodos();
+
     let todo;
     const createTodo = (e) => {
         e.preventDefault()
+
         const item = {
+            docId: Math.floor(Math.random() * 10000) + 1,
             description: todo,
             done: false
         }
+        console.log(item)
         // firestore.collection('todos').doc().set(item)
         setTodos([
             ...todos,
