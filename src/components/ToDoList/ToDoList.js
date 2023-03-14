@@ -1,5 +1,4 @@
-import RemoveTodo from '../RemoveTodo/RemoveTodo';
-import UpdateTodo from "../UpdateTodo/UpdateTodo";
+import RemoveTodo from './RemoveTodo';
 
 const ToDoList = ({description, done, docId}) => {
     return (
@@ -8,7 +7,6 @@ const ToDoList = ({description, done, docId}) => {
                 <h2>{description}</h2>
                 <p>{done ? 'Done!' : 'Still to do!'}</p>
             </div>
-            <UpdateTodo docId={docId}></UpdateTodo>
             <RemoveTodo docId={docId}></RemoveTodo>
         </div>
     )

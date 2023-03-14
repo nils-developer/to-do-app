@@ -1,5 +1,4 @@
 import { Button } from '../Button/Button';
-import { useState } from "react";
 import { firestore } from '../../firebase/firebase-config';
 
 const submitButton = {
@@ -15,7 +14,7 @@ const CreateTodo = ({setTodos, todos}) => {
             description: todo,
             done: false
         }
-        firestore.collection('todos').doc().set(item)
+        // firestore.collection('todos').doc().set(item)
         setTodos([
             ...todos,
             item

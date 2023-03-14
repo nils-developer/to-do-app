@@ -1,16 +1,15 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useTodos } from './Contexts';
 import NavBar from './components/NavBar/NavBar';
 import ToDoList from './components/ToDoList/ToDoList';
 import CreateTodo from './components/CreateTodo/CreateTodo';
-import { firestore } from './firebase/firebase-config';
+// import { firestore } from './firebase/firebase-config';
 
 function App() {
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useTodos()
     const fetchTodos = async () => {
-        const req = await firestore.collection('todos').get()
-        const tempTodos = req.docs.map((todo) => ({...todo.data(), id:todo.id}))
-        setTodos(tempTodos)
+
     }
 
     useEffect(() => {
