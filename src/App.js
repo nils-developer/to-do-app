@@ -4,12 +4,22 @@ import { useTodos } from './Contexts';
 import NavBar from './components/NavBar/NavBar';
 import ToDoList from './components/ToDoList/ToDoList';
 import CreateTodo from './components/CreateTodo/CreateTodo';
+import axios from "axios";
 // import { firestore } from './firebase/firebase-config';
 
-function App() {
-    const [todos, setTodos] = useTodos()
-    const fetchTodos = async () => {
+const App = () => {
 
+    const [todos, setTodos] = useTodos()
+
+    const fetchTodos = async () => {
+        axios.get("http://localhost:8080/items")
+            .then(
+                response => setTodos(
+                    response.data
+                )
+            )
+            .catch(
+                error => console.error(error));
     }
 
     useEffect(() => {

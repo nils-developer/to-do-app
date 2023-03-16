@@ -19,7 +19,6 @@ const CreateTodo = () => {
             description: todo,
             done: false
         }
-        console.log(item)
         // firestore.collection('todos').doc().set(item)
         setTodos([
             ...todos,
