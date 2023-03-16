@@ -1,29 +1,41 @@
 import { Button } from '../Button/Button';
 import { useTodos } from "../../Contexts";
-// import { firestore } from '../../firebase/firebase-config';
+import axios from "axios";
 
 const submitButton = {
     type: 'submit',
     text: 'Add To-Do'
 }
 
+
 const CreateTodo = () => {
     const [todos, setTodos] = useTodos();
 
-    let todo;
+    let newTodoDescription;
+
     const createTodo = (e) => {
         e.preventDefault()
 
-        const item = {
-            docId: Math.floor(Math.random() * 10000) + 1,
-            description: todo,
+        let item = {
+            description: newTodoDescription,
             done: false
         }
-        // firestore.collection('todos').doc().set(item)
+
+        console.log(item)
+
+        axios.post(
+            "http://localhost:8080/items/create",
+            item
+        ).then(
+            () => console.log(`Created item ${item}`)
+        ).catch(
+            error => console.error(error)
+        );
+
         setTodos([
             ...todos,
             item
-        ])
+        ]);
     }
 
     return (
@@ -32,8 +44,8 @@ const CreateTodo = () => {
             <input
                 className='border-solid border-2 rounded-sm mr-2'
                 type={'text'}
-                value={todo}
-                onChange={(event) => (todo = event.target.value)}
+                value={newTodoDescription}
+                onChange={event => (newTodoDescription = event.target.value)}
             />
             <Button type={submitButton.type} text={submitButton.text}></Button>
         </form>

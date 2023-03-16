@@ -3,16 +3,15 @@ import { useEffect } from 'react';
 import { useTodos } from './Contexts';
 import NavBar from './components/NavBar/NavBar';
 import ToDoList from './components/ToDoList/ToDoList';
-import CreateTodo from './components/CreateTodo/CreateTodo';
+import CreateTodo from './components/ToDoList/CreateTodo';
 import axios from "axios";
-// import { firestore } from './firebase/firebase-config';
 
 const App = () => {
 
     const [todos, setTodos] = useTodos()
 
     const fetchTodos = async () => {
-        axios.get("http://localhost:8080/items")
+        await axios.get("http://localhost:8080/items")
             .then(
                 response => setTodos(
                     response.data
@@ -24,7 +23,7 @@ const App = () => {
 
     useEffect(() => {
         fetchTodos()
-    }, []);
+    });
 
   return (
     <div className="App">
@@ -38,7 +37,7 @@ const App = () => {
                  todos.map((todo, index) => {
                      return(
                          <ToDoList
-                             docId={todo.docId}
+                             id={todo.id}
                              description={todo.description}
                              done={todo.done}
                              key={index}
