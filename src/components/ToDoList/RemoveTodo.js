@@ -8,22 +8,17 @@ const deleteButton = {
 }
 
 const RemoveTodo = ({id}) => {
-    const [todos, setTodos] = useTodos();
-    const removeTodo = (e) => {
+    const [todos] = useTodos();
+    const removeTodo = async (e) => {
         e.preventDefault()
 
-        const filteredTodos = todos.filter(todo =>  id !== todo.id);
-        const deleteTodoId = todos.filter(todo => id === todo.id).map(todo => todo.id)[0]
+        const  deleteTodoWithId = todos.find(todo => todo.id === id)?.id;
 
-        axios.delete(`http://localhost:8080/items/delete/${deleteTodoId}`)
-            .then(
-                () => console.log(`Deleted object with id: ${deleteTodoId}`)
-            )
-            .catch(
-                error => console.error(error)
-            )
-
-        setTodos(filteredTodos);
+        await axios.delete(
+            `http://localhost:8080/items/delete/${deleteTodoWithId}`
+        ).catch(
+            error => console.error(error)
+        );
     }
     return (
         <form className='flex justify-center' onSubmit={removeTodo}>

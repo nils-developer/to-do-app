@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Button } from '../Button/Button';
 import { useTodos } from "../../Contexts";
 import axios from "axios";
@@ -9,34 +10,26 @@ const submitButton = {
 
 
 const CreateTodo = () => {
-    const [todos, setTodos] = useTodos();
+    const inputRef = useRef(null);
 
-    let newTodoDescription;
-
-    const createTodo = (e) => {
+    const createTodo = async (e) => {
         e.preventDefault()
 
         let item = {
-            description: newTodoDescription,
+            description: inputRef.current.value,
             done: false
         }
 
-        console.log(item)
-
-        axios.post(
+        await axios.post(
             "http://localhost:8080/items/create",
             item
-        ).then(
-            () => console.log(`Created item ${item}`)
         ).catch(
             error => console.error(error)
         );
 
-        setTodos([
-            ...todos,
-            item
-        ]);
+        inputRef.current.value = '';
     }
+
 
     return (
         <form className='my-5' onSubmit={createTodo}>
@@ -44,8 +37,7 @@ const CreateTodo = () => {
             <input
                 className='border-solid border-2 rounded-sm mr-2'
                 type={'text'}
-                value={newTodoDescription}
-                onChange={event => (newTodoDescription = event.target.value)}
+                ref={inputRef}
             />
             <Button type={submitButton.type} text={submitButton.text}></Button>
         </form>
